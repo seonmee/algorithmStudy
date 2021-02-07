@@ -1,4 +1,4 @@
-package com.algorithm.week1;
+package com.algorithm.week1.common;
 
 import java.util.Queue;
 import java.util.LinkedList;
@@ -14,7 +14,7 @@ public class Programmers_기능개발 {
 		}
 
 	}
-
+	
 	public static Queue<Integer> solution(int[] progresses, int[] speeds) {
 		int[] answer = {};
 		// 일수 계산
@@ -30,7 +30,8 @@ public class Programmers_기능개발 {
 		int cnt = 1;
 		int front = day.poll();
 		// e.g. 7 > 3 < 9
-		//      2       1
+		//      1
+		//          2   1
 		while (!day.isEmpty()) {
 			// 앞에 일수가 크면
 			if (front >= day.peek()) {

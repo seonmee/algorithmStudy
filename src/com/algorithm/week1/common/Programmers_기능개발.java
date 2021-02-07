@@ -16,7 +16,6 @@ public class Programmers_기능개발 {
 	}
 	
 	public static Queue<Integer> solution(int[] progresses, int[] speeds) {
-		int[] answer = {};
 		// 일수 계산
 		for (int i = 0; i < speeds.length; i++) {
 			int per = 100 - progresses[i];

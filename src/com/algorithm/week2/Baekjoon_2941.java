@@ -1,4 +1,4 @@
-package com.algorithm.week2.common;
+package com.algorithm.week2;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,17 +24,20 @@ public class Baekjoon_2941 {
 				}
 				break;
 			case 'd':
-				if (i < length - 1) {
-					if (st.charAt(i + 1) == '-') {
-						i++;
-					}
-				}
-				if (i < length - 2) {
-					if (st.charAt(i + 1) == 'z' && st.charAt(i + 2) == '=') {
-						i += 2;
-					}
-				}
-				break;
+	            if (i < length - 2) {
+	               if (st.charAt(i + 1) == 'z' && st.charAt(i + 2) == '=') {
+	                  i += 2;
+	               }
+	               else if (st.charAt(i + 1) == '-') {
+	                  i++;
+	               }
+	            }
+	            else if(i < length - 1) {
+	               if (st.charAt(i + 1) == '-') {
+	                  i++;
+	               }
+	            }
+	            break;
 			case 'l':
 			case 'n':
 				if (i < length - 1) {

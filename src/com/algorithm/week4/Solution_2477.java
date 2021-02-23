@@ -1,45 +1,45 @@
 package com.algorithm.week4;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
-
+import java.util.Scanner;
+// Baeckjoon 참외밭
 public class Solution_2477 {
 
-	public static void main(String[] args) throws NumberFormatException, IOException {
-		int K; // 넓이에 곱할 수
-		Queue<int[]> que = new LinkedList<>();
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st;
-		K = Integer.parseInt(br.readLine());
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int res = 0;
+		int[] map = new int[6];
+		int K = sc.nextInt();
 		for (int i = 0; i < 6; i++) {
-			st = new StringTokenizer(br.readLine());
-			que.add(new int[] { Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()) });
+			sc.nextInt();
+			map[i] = sc.nextInt();
 		}
-		while (que.peek()[0] != 3) {
-			que.add(que.poll());
+		// 전체 사각형
+		int w = 0, h = 0;
+		for (int i = 0; i < 6; i++) {
+			if (i % 2 == 0)
+				w = Math.max(w, map[i]);
+			else
+				h = Math.max(h, map[i]);
 		}
-		int ans = 0,r = 0;
-		for (int i = 0; i < 2; i++) {
-			int c = 0;
-			for (int j = 0; j < 2; j++) {
-				if (que.peek()[0] == 4) {
-					r -= que.peek()[1];
+		int ww = 0, hh = 0;
+		// 잘린 사각형
+		for (int i = 0; i < 6; i++) {
+			if (i % 2 == 0) {
+				// x % y => k
+				// (x + y) % y => k
+				// 자바는 -3%6 => -3
+				if (h == (map[(i - 1 + 6) % 6] + map[(i + 1) % 6])) {
+					ww = map[i];
 				}
-				if (que.peek()[0] == 3) {
-					r += que.peek()[1];
+			} else {
+				if (w == (map[(i - 1 + 6) % 6] + map[(i + 1) % 6])) {
+					hh = map[i];
 				}
-				if (que.peek()[0] == 1) {
-					c += que.peek()[1];
-				}
-				que.poll();
 			}
-			ans += r * c;
 		}
-		System.out.println(ans * K);
+		// 출력
+		System.out.println((w * h - ww * hh) * K);
+
 	}
 
 }

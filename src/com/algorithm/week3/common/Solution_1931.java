@@ -1,4 +1,4 @@
-package com.algorithm.week3;
+package com.algorithm.week3.common;
 
 import java.io.BufferedReader;
 import java.io.IOException;

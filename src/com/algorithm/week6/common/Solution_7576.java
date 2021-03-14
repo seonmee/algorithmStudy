@@ -49,9 +49,11 @@ public class Solution_7576 {
 	private static void bfs() {
 		while(!ripen.isEmpty()) {
 			// 시작 위치
-			int sr = ripen.peek()[0];
-			int sc = ripen.peek()[1];
-			ripen.poll();
+			int[] to = ripen.poll();
+			int sr = to[0];
+			int sc = to[1];
+			//ripen.poll();
+			
 			// 사방탐색
 			for (int d = 0; d < 4; d++) {
 				int nr = sr + dr[d];

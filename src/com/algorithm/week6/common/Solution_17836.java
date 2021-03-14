@@ -9,8 +9,7 @@ import java.util.StringTokenizer;
 
 // 공주님을 구하라!
 public class Solution_17836 {
-	static int N, M, T, gr, gc;
-	static boolean check; // 그람을 안찾고 공주를 구한 경우
+	static int N, M, T;
 	/**
 	 * 3 3 10
 	 * 0 1 2
@@ -19,8 +18,8 @@ public class Solution_17836 {
 	 * */
 	static int time= Integer.MAX_VALUE;
 	static int[][] map, visited;
-	static int[] dr = { -1, 1, 0, 0 };
-	static int[] dc = { 0, 0, -1, 1 };
+	static int[] dr = { 0, 0, -1, 1 };
+	static int[] dc = { -1, 1 ,0, 0};
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -34,35 +33,37 @@ public class Solution_17836 {
 			st = new StringTokenizer(br.readLine());
 			for (int j = 0; j < M; j++) {
 				map[i][j] = Integer.parseInt(st.nextToken());
-				if(map[i][j]==2) {
-					gr=i;
-					gc=j;
-				}
 			}
 		}
 		// 로직
 		// 1) gram을 찾고
-		moveToGram();
-		// 2) 공주를 구해(그람을 찾아 구한경우)
-		if(!check) {
-			time += (N-1 - gr) + (M-1 - gc);
-		}
+		moveToGram(); 
 		// 출력
 		System.out.println(time <= T ? time : "Fail");
 	}
 
 	/**
-	 * bfs로 4방탐색을 하며 그람을 찾는 함수
+	 * bfs로 4방탐색을 하며 공주와 그람을 찾는 함수
 	 */
 	private static void moveToGram() {
 		Queue<int[]> que = new LinkedList<int[]>();
 		que.offer(new int[] {0,0});
 		visited[0][0]=1;
-		boolean flag = false; // 그람을 찾았나? 공주를 찾았나?
+		boolean flag = false;
 		while(!que.isEmpty()) {
-			int r = que.peek()[0];
-			int c = que.peek()[1];
-			que.poll();
+			int[] m = que.poll();
+			int r = m[0];
+			int c = m[1];
+			// 공주를 찾으면
+			if(r==N-1 && c==M-1) {
+				if(flag) {
+					// 그람을 찾았을 경우
+					time = time<=visited[r][c]-1?time:visited[r][c]-1;// 최단 거리
+				}else {
+					time = visited[r][c]-1;
+				}
+				return;
+			}
 			// 그람 찾기 (4방)
 			for (int d = 0; d < 4; d++) {
 				int nr = r + dr[d];
@@ -77,25 +78,15 @@ public class Solution_17836 {
 					// 그람을 찾았으면
 					if (map[nr][nc] == 2) {
 						visited[nr][nc] = visited[r][c]+1;
-						time = visited[nr][nc]-1;// 최단 거리
+						time = visited[r][c]+(N-1 - nr) + (M-1 - nc);// 최단 거리
 						flag=true;
-						return;
-					}
-					// 공주를 찾으면
-					if(nr==N-1 &&nc==M-1) {
-						visited[nr][nc] = visited[r][c]+1;
-						time = visited[nr][nc]-1;// 최단 거리
-						check=true;
-						return;
 					}
 				}
 			}
-			
-		}
-		if(!flag) {
-			time = 10000;
-		}
-		
+			if(!flag) {
+				time=10001;
+			}
+		}	
 	}
 
 	private static boolean isContain(int nr, int nc) {

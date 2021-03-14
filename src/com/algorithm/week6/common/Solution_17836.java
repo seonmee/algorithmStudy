@@ -1,4 +1,4 @@
-package com.algorithm.week6.common.Solution_17836;
+package com.algorithm.week6.common;
 
 import java.io.BufferedReader;
 import java.io.IOException;

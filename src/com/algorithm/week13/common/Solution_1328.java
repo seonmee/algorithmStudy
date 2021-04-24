@@ -1,7 +1,7 @@
 package com.algorithm.week13.common;
 
 import java.util.Scanner;
-// 고층빌딩
+//고층빌딩
 public class Solution_1328 {
 	static final int MOD = 1000000007;
 	public static void main(String[] args) {

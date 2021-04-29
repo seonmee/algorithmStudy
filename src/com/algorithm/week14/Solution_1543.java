@@ -1,7 +1,7 @@
 package com.algorithm.week14;
 
 import java.util.Scanner;
-// 문서 검색
+// 문서 검색 
 public class Solution_1543 {
 	
 	public static void main(String[] args) {

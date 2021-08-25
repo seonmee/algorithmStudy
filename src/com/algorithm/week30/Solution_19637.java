@@ -25,7 +25,8 @@ public class Solution_19637 {
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
-
+		StringBuilder sb = new StringBuilder("");
+		
 		N = Integer.parseInt(st.nextToken());
 		M = Integer.parseInt(st.nextToken());
 
@@ -39,8 +40,9 @@ public class Solution_19637 {
 
 		for (int i = 0; i < M; i++) {
 			int input = Integer.parseInt(br.readLine());
-			System.out.println(solve(input));
+			sb.append(solve(input) + "\n");
 		}
+		System.out.print(sb.toString());
 	}
 
 	private static String solve(int input) {
